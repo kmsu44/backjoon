@@ -8,7 +8,7 @@ def solution(maps):
             if jdata == 'E':
                 end = (idx,jdx)
             if jdata == 'L':
-                rever = (idx,jdx)
+                lever = (idx,jdx)
     def BFS(x,y,kx,ky):
         q = deque()
         q.append((x,y,0))
@@ -26,12 +26,12 @@ def solution(maps):
                     visit[dx][dy] = False
                     q.append((dx,dy,cnt+1))
         return -1
-    a = BFS(start[0],start[1],rever[0],rever[1])
+    a = BFS(start[0],start[1],lever[0],lever[1])
     if a != -1:
         answer += a
     else:
         return -1
-    a = BFS(rever[0],rever[1],end[0],end[1])
+    a = BFS(lever[0],lever[1],end[0],end[1])
     if a!= -1:
         answer += a
     else:
