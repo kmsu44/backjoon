@@ -1,19 +1,23 @@
+
 import sys
 input = sys.stdin.readline
 # 시간제한 2초
-# M = 500 -> O(N^3)가능
+# M = 500 -> O(N^3)가능 500 ^3  -> 125,000,000
+# DFS한번 탐색할 때 4 * 4 * 4 * 4 = 256 * O(N^2) <= O(n^3)
 n, m = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(n)]
-result = []
+global result
 
 nx = [-1, 1, 0, 0]
 ny = [0, 0, -1, 1]
+result = 0
 
 
 def DFS(x, y, cnt, score):
+    global result
     # 상 하 좌 우
     if cnt == 4:
-        result.append(score)
+        result = max(result, score)
         return
     for i in range(4):
         dx = nx[i] + x
@@ -35,19 +39,18 @@ for i in range(n):
         visit[i][j] = True
         # ㅏ
         if 0 < i < n-1 and 0 < j < m:
-            result.append(graph[i][j] + graph[i]
-                          [j-1] + graph[i+1][j-1] + graph[i-1][j-1])
+            result = max(result, graph[i][j] + graph[i]
+                         [j-1] + graph[i+1][j-1] + graph[i-1][j-1])
         # ㅓ
         if 0 < i < n-1 and 0 <= j < m-1:
-            result.append(graph[i][j] + graph[i]
-                          [j+1] + graph[i+1][j+1] + graph[i-1][j+1])
+            result = max(result, graph[i][j] + graph[i]
+                         [j+1] + graph[i+1][j+1] + graph[i-1][j+1])
         # ㅜ
         if 0 < i < n and 0 < j < m-1:
-            result.append(graph[i][j] + graph[i-1]
-                          [j] + graph[i-1][j-1] + graph[i-1][j+1])
+            result = max(result, graph[i][j] + graph[i-1]
+                         [j] + graph[i-1][j-1] + graph[i-1][j+1])
         # ㅗ
         if 0 <= i < n-1 and 0 < j < m-1:
-            result.append(graph[i][j] + graph[i+1]
-                          [j] + graph[i+1][j+1] + graph[i+1][j-1])
-result.sort(reverse=True)
-print(result[0])
+            result = max(result, graph[i][j] + graph[i+1]
+                         [j] + graph[i+1][j+1] + graph[i+1][j-1])
+print(result)
