@@ -2,7 +2,6 @@ str1 = input()
 str2 = input()
 m = len(str1)+1
 n = len(str2)+1
-
 Memo = [[0 for _ in range(m)] for _ in range(n)]
 for i in range(n):
     for j in range(m):
