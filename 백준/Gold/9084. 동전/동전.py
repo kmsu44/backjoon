@@ -1,4 +1,5 @@
-
+import sys
+sys.setrecursionlimit(10**9)
 T = int(input())
 for i in range(T):
     n = int(input())
