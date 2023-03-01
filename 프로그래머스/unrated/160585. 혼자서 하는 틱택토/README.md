@@ -1,4 +1,4 @@
-# [unrated] 혼자서 하는 틱택토 - 160585 
+# [unrated] 혼자서 하는 틱택토 - 160585 21m 51s
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/160585) 
 
