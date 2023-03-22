@@ -1,18 +1,11 @@
-money = int(input())
-if money < 2:
-    print(-1)
-    exit()
-cnt_5, money = divmod(money, 5)
-# print(cnt_5, money)
-if cnt_5 > 0 and money % 2 != 0:
-    cnt_5 -= 1
-    money += 5
-cnt_2, money = divmod(money, 2)
-# print(cnt_2, money)
+import sys
 
-res = cnt_5 + cnt_2
+cost = int(sys.stdin.readline())
+coins=[0,-1,1,-1,2,1]+[0]*(cost-5)
 
-if money != 0:
-    print(-1)
-else:
-    print(res)
+for i in range(6,cost+1):
+    if coins[i-2] != -1:
+        coins[i] = coins[i-2]+1
+    if coins[i-5] != -1:
+        coins[i] = min(coins[i],coins[i-5] + 1)
+print(coins[cost])
