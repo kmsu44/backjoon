@@ -1,21 +1,25 @@
-from collections import deque
-a, b = map(int, input().split())
+import sys
 
+A, B = map(int,sys.stdin.readline().split())
+cnt = 1
+flag = 0
 
-def BFS(a, b):
-    q = deque()
-    q.append((a, b, 1))
-    while q:
-        a, b, cnt = q.popleft()
-        if a == b:
-            return cnt
-        if b <= 0:
-            break
-        if b % 10 == 1:
-            q.append((a, b//10, cnt+1))
-        if b % 2 == 0:
-            q.append((a, b//2, cnt + 1))
-    return -1
+while A != B:
+    tmp = B
+    if B % 10 == 1:
+        B //= 10
+        cnt+=1
+    elif B % 2 == 0:
+        B //= 2
+        cnt+=1
 
+    if tmp == B:
+        flag = 1
+        break
 
-print(BFS(a, b))
+if flag == 0:
+    print(cnt)
+else:
+    print(-1)
+
+#10m
