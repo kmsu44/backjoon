@@ -1,19 +1,19 @@
-from collections import deque
-n, k = map(int, (input().split()))
-L = [0] + list(map(int, input().split()))
-count_dict = {i: 0 for i in range(200001)}
-P1 = 1
-res = 1
-for index in range(1, n+1):
-    num = L[index]
-    count_dict[num] += 1
-    if count_dict[num] > k:
-        res = max(res, index - P1)
-        while L[P1] != num:
-            P1_num = L[P1]
-            count_dict[P1_num] -= 1
-            P1 += 1
-        P1 += 1
-        count_dict[num] -= 1
-res = max(res, index - P1 + 1)
-print(res)
+import sys
+from collections import defaultdict
+inp = sys.stdin.readline
+n,k = map(int,inp().split())
+seq = list(map(int,inp().split()))
+off_set = defaultdict(int)
+front = 0
+rear = 0
+cnt = 0
+ans = 0
+while rear < n:
+    if off_set[seq[rear]] < k:
+        off_set[seq[rear]] += 1
+        rear += 1
+    else:
+        off_set[seq[front]] -= 1
+        front += 1
+    ans = max(ans,rear-front)         
+print(ans)
