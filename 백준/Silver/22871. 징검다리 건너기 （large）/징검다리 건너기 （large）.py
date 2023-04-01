@@ -1,31 +1,27 @@
-n = int(input())
-stone = [0] + list(map(int, input().split()))
-s, e, r = 1, (n-1) * (1 + abs(stone[n] - stone[1])), 0
 
-while s <= e:
-    m = (s + e) // 2
+n = int(input())
+L = [0] + list(map(int, input().split()))
+left = 0
+right = (n-1) * (1 + abs(L[n] - L[1]))
+while left <= right:
+    mid = (left+right)//2
     flag = 0
     stack = [1]
-    v = [False]*(n+1)
-    v[1] = True
-    
-    while stack:
-        k = stack.pop()
+    visit = [True] * (n+1)
+    visit[1] = False
 
-        if k == n:
+    while stack:
+        i = stack.pop()
+        if i == n:
             flag = 1
             break
-
-        for i in range(k + 1, n + 1):
-            p = (i - k) * (1 + abs(stone[i] - stone[k]))
-            if p <= m and not v[i]:
-                stack.append(i)
-                v[i] = True
-
-    if flag:
-        e = m - 1
-        r = m
+        for j in range(i+1, n+1):
+            t = (j-i) * (1 + abs(L[i] - L[j]))
+            if t <= mid and visit[j]:
+                stack.append(j)
+                visit[j] = False
+    if flag == 1:
+        right = mid-1
     else:
-        s = m + 1
-
-print(r)
+        left = mid + 1
+print(left)
