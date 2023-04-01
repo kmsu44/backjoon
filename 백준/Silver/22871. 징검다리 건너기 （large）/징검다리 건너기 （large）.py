@@ -1,11 +1,31 @@
-import sys
 n = int(input())
-L = [0] + list(map(int, input().split()))
-dp = [0] * (n+1)
-for i in range(n-1, 0, -1):
-    M = sys.maxsize
-    for j in range(i+1, n):
-        M = min(M, max((j-i) * (1 + abs(L[i] - L[j])), dp[j]))
-    M = min(M, (n-i) * (1 + abs(L[i]-L[n])))
-    dp[i] = M
-print(dp[1])
+stone = [0] + list(map(int, input().split()))
+s, e, r = 1, (n-1) * (1 + abs(stone[n] - stone[1])), 0
+
+while s <= e:
+    m = (s + e) // 2
+    flag = 0
+    stack = [1]
+    v = [False]*(n+1)
+    v[1] = True
+    
+    while stack:
+        k = stack.pop()
+
+        if k == n:
+            flag = 1
+            break
+
+        for i in range(k + 1, n + 1):
+            p = (i - k) * (1 + abs(stone[i] - stone[k]))
+            if p <= m and not v[i]:
+                stack.append(i)
+                v[i] = True
+
+    if flag:
+        e = m - 1
+        r = m
+    else:
+        s = m + 1
+
+print(r)
