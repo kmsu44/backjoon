@@ -1,13 +1,9 @@
-n = int(input())
-left = 0
-right = 2**63
+import math
+import sys
 
-
-while left <= right:
-    mid = (left + right) // 2
-
-    if mid * mid >= n:
-        right = mid - 1
-    else:
-        left = mid + 1
-print(left)
+N=int(sys.stdin.readline())
+q=int(math.sqrt(N))
+if q**2<N:
+    print(q+1)
+else:
+    print(q)
