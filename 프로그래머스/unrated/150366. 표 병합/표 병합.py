@@ -5,7 +5,6 @@ class Node:
     def __init__(self, data):
         self.data = data
 
-
 value_list = [[Node("EMPTY") for _ in range(51)] for _ in range(51)]
 
 def check(r,c):
@@ -35,23 +34,17 @@ def merge(r1, c1, r2, c2):
     if r1 == r2 and c1 == c2:
         return
     change_list = []
-    if value_list[r1][c1].data == 'EMPTY' and value_list[r2][c2].data != "EMPTY":
-        node = value_list[r1][c1]
-        for i in range(1, 51):
-            for j in range(1, 51):
-                if value_list[i][j] == node:    
-                    change_list.append((i, j))
-        
-        for i, j in change_list:
-            value_list[i][j] = value_list[r2][c2]
-            
+    if value_list[r1][c1].data == 'EMPTY' and value_list[r2][c2] == 'EMPTY':
+        value_list[r2][c2] = value_list[r1][c1]
+        return
+    if value_list[r1][c1].data == 'EMPTY':
+        value_list[r1][c1] = value_list[r2][c2]
     else:
         node = value_list[r2][c2]
         for i in range(1, 51):
             for j in range(1, 51):
-                if value_list[i][j] == node:    
+                if value_list[i][j] == node:
                     change_list.append((i, j))
-        
         for i, j in change_list:
             value_list[i][j] = value_list[r1][c1]
 
@@ -69,6 +62,8 @@ def unmerge(r, c):
     for i, j in change_list:
         value_list[i][j] = Node("EMPTY")
     value_list[r][c] = Node(tmp)
+    
+
 
 def solution(commands):
     answer = []
@@ -93,7 +88,8 @@ def solution(commands):
         elif command == 'UNMERGE':
             r, c = map(int, command_list[1:])
             unmerge(r, c)
-        else:
+        elif command == "PRINT":
+            
             r, c = map(int, command_list[1:])
             answer.append(value_list[r][c].data)
         for i in range(1, 5):
