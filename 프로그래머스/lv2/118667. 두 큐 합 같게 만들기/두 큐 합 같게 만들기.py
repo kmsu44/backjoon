@@ -1,5 +1,5 @@
 # 2시 40분 시작
-import sys
+
 def Area(a,b,middle):
     if a <= middle and b <= middle:
         return 1
@@ -11,8 +11,7 @@ def Area(a,b,middle):
     
 def solution(queue1, queue2):
     
-    answer = sys.maxsize
-    
+    answer = 1000
     memo = [0 for _ in range(len(queue1) * 2 +1)]
     L = queue1 + queue2
     
@@ -50,18 +49,16 @@ def solution(queue1, queue2):
         return -1
     q1_s = 1
     q1_e = len(L)//2
-    q2_s = q1_e+1
+    q2_s = len(queue1)+1
     q2_e = len(L)
-    
-    print('q1_s', q1_s, 'q1_e', q1_e, 'q2_s', q2_s,'q2_e',q2_e)
     for a, b in tt:
         print(a,b)
+        
         if a == q1_s and b == q1_e or a == q2_s and b == q2_e:
             return 0
         tmp = 0
         area = Area(a,b,len(L)//2)
         print('middle',len(L)//2, 'area',area)
-        
         # 오른쪽에만 있을 때
         if area == 3:
             # 큐의 마지막에 있을 때
@@ -97,8 +94,14 @@ def solution(queue1, queue2):
                 tmp += q2_e -q2_s +1
                 # 아닌부분도 넘겨주기
                 tmp += a-q1_s
-        print('tmp',tmp)
+                
             
             
-        answer = min(answer,tmp)    
+        answer = min(answer,tmp)
+        
+            
+            
+        
+        
+        
     return answer
