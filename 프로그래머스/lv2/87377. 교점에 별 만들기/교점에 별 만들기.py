@@ -45,6 +45,6 @@ def solution(line):
     res = []
     for i in range(len(answer)-1,-1,-1):
         res.append(''.join(answer[i]))
-        # print(i)
+        
         
     return res
