@@ -6,6 +6,7 @@ def timeconvert(time):
 def solution(m, musicinfos):
     data = {
         'C#': 'J',
+        
         'D#': 'K',
         'F#': 'L',
         'G#': 'M',
