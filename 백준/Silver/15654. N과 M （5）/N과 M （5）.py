@@ -1,10 +1,25 @@
-from itertools import permutations
+
 
 n, m = map(int,input().split())
 arr = list(map(int,input().split()))
+arr.sort()
+ans = []
+visited = set()
+def make_permutation(arr,tmp):
+    if len(tmp) == m:
+        ans.append(tmp[::])
+    for i in arr:
+        if i not in visited:
+            tmp.append(i)
+            visited.add(i)
+            make_permutation(arr,tmp)
+            tmp.pop()
+            visited.remove(i)
 
-L = list(permutations(arr,m))
-L.sort(key=lambda x: [x[i] for i in range(m)])
+for i in arr:
+    visited.add(i)
+    make_permutation(arr,[i])
+    visited.remove(i)
 
-for a in L:
-    print(*a)
+for i in ans:
+    print(*i)
