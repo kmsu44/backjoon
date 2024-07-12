@@ -45,7 +45,7 @@ def divide(x1,x2,y1,y2,direction):
     j_cnt,i_cnt = count_jewel_impurities(x1,x2,y1,y2)
     ans = 0
     # 판으로 결정이 난 경우
-    if j_cnt == 0 or j_cnt >=2 and i_cnt ==0 or j_cnt==1 and i_cnt >= 1:
+    if j_cnt == 0:
         return 0
     if j_cnt == 1 and i_cnt == 0:
         return 1
